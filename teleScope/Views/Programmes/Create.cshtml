@@ -1,0 +1,163 @@
+﻿@model teleScope.Models.Programme
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Customer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>
+
+    <style>
+        /*input type number appear as text field in main browsers*/
+
+        /*Chrome, Safari, Edge, Opera*/
+        input::-webkit-outer-spin-button
+        input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /*Firefox*/
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Section: Design Block -->
+    <section class="">
+        <!-- Jumbotron -->
+        <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+            <div class="container">
+                <div class="row gx-lg-5 align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <h1 class="my-5 display-4 fw-bold ls-tight text-black">
+                            Admin Notification<br />
+                            <span class="text-primary">Program Creation</span>
+                        </h1>
+                        <p style="color: hsl(217, 10%, 50.8%)">
+                            You are about to create a new <strong>Program</strong>, an important step in defining a new offering for your business. This action allows you to set key parameters and align the program with your business goals.
+
+                            <br><br> Please ensure that all information is accurate, compliant with regulations, and in line with company policies. Failure to provide correct or compliant data may lead to operational issues and compliance risks.
+
+                            <br><br> If you need assistance, feel free to contact support for help.
+                            <a asp-action="Index">Back to Programs</a>
+                            <br />
+                        </p>
+                        
+                        <p class="float-md-start">
+                            <a asp-action="Index" class="btn btn-primary">Back to Programs</a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <div class="card">
+                            <div class="card-body py-5 px-md-5 text-black">
+                                <h4 class="card-title text-center"><strong>Add Program</strong></h4>
+                                <br>
+                                <form asp-action="Create">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <label asp-for="ProgrName" class="control-label fw-bold"></label>
+                                        <input asp-for="ProgrName" class="form-control" required />
+                                        <span asp-validation-for="ProgrName" class="text-danger"></span>
+                                    </div>
+                                    <!-- 2 column grid layout with text inputs -->
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div data-mdb-input-init class="form-outline">
+                                                <label asp-for="LandlineMinutes" class="control-label fw-bold"></label>
+                                                <input asp-for="LandlineMinutes" class="form-control" required />
+                                                <span asp-validation-for="LandlineMinutes" class="text-danger"></span>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div data-mdb-input-init class="form-outline">
+                                                <label asp-for="MobileMinutes" class="control-label fw-bold"></label>
+                                                <input asp-for="MobileMinutes" class="form-control" required />
+                                                <span asp-validation-for="MobileMinutes" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col mb-4">
+                                            <div class="form-outline">
+                                                <label asp-for="LandlineFee" class="control-label fw-bold"></label>
+                                                <div class="input-group">
+                                                    <input asp-for="LandlineFee" class="form-control" required/>
+                                                    <span class="input-group-text">€</span>
+                                                </div>
+                                                <span asp-validation-for="LandlineFee" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col mb-4">
+                                            <div class="form-outline">
+                                                <label asp-for="MobileFee" class="control-label fw-bold"></label>
+                                                <div class="input-group">
+                                                    <input asp-for="MobileFee" class="form-control" required />
+                                                    <span class="input-group-text">€</span>
+                                                </div>
+                                                <span asp-validation-for="MobileFee" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col mb-4">
+                                            <div class="form-outline">
+                                                <label asp-for="FiveDigitFee" class="control-label fw-bold"></label>
+                                                <div class="input-group">
+                                                    <input asp-for="FiveDigitFee" class="form-control" required />
+                                                    <span class="input-group-text">€</span>
+                                                </div>
+                                                <span asp-validation-for="FiveDigitFee" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        
+                                     </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label asp-for="FixedCost" class="control-label fw-bold"></label>
+                                        <div class="input-group">
+                                            <input asp-for="FixedCost" class="form-control" required />
+                                            <span class="input-group-text">€</span>
+                                        </div>
+                                        <span asp-validation-for="FixedCost" class="text-danger"></span>
+                                    </div>
+                                    <!-- Submit button -->
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                                        Create
+                                    </button>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jumbotron -->
+    </section>
+    <!-- Section: Design Block -->
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>
+

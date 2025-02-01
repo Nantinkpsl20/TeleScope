@@ -1,0 +1,143 @@
+﻿@using X.PagedList.EntityFramework
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<teleScope.Models.Programme>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - teleScope_final</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <style>
+        .c-item {
+            height: 480px;
+        }
+
+        .c-img {
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .programs {
+            background-color: lightblue;
+            text-align: center;
+            height: 700px;
+        }
+
+        .card-img-card,
+        .image-card {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .image-card {
+            max-height: 50%;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            object-fit: contain;
+        }
+
+        .left {
+            text-align: left;
+            font-size: small;
+            color: black;
+        }
+
+        .card {
+            height: 560px;
+            width: 320px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-body {
+            flex-grow: 1;
+        }
+
+            .card-body .btn {
+                margin-bottom: 30px;
+            }
+
+        .card-text {
+            font-size: 13pt;
+        }
+
+        .iwt {
+            display: block;
+        }
+
+        .bi {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Programs</h1>
+
+    <div class="container mt-5">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card border-info mb-3">
+                        <br />
+                        
+                        <div class="card-body">
+                            <h2 class="card-title"><strong>@Html.DisplayFor(modelItem => item.ProgrName)</strong></h2>
+                            <br />
+                            <p class="card-text left"><i class="bi bi-telephone"></i>&nbsp;<strong>@Html.DisplayFor(modelItem => item.LandlineMinutes)</strong> to landline numbers</p>
+                            <p class="card-text left"><i class="bi bi-phone"></i>&nbsp;<strong>@Html.DisplayFor(modelItem => item.MobileMinutes)</strong> to mobile phones</p>
+                            <p class="card-text left"><i class="bi bi-chat-right"></i>&nbsp;<strong>2000 SMS</strong></p>
+                            <br />
+                            <h6 class="card-text"><strong>Extra cost/minute</strong></h6>
+                            <p class="card-text left"><i class="bi bi-telephone"></i>&nbsp;<strong>@Html.DisplayFor(modelItem => item.LandlineFee)<i class="bi bi-currency-euro"></i></strong> for landline calls</p>
+                            <p class="card-text left"><i class="bi bi-phone"></i>&nbsp;<strong>@Html.DisplayFor(modelItem => item.MobileFee)<i class="bi bi-currency-euro"></i></strong> to mobile phones</p>
+                            <p class="card-text left"><i class="bi bi-5-square"></i>&nbsp;<strong>@Html.DisplayFor(modelItem => item.FiveDigitFee)<i class="bi bi-currency-euro"></i></strong> for 5 digit calls</p>
+                            <br />
+                            <h6 class="card-text"><strong>Price: @Html.DisplayFor(modelItem => item.FixedCost)<i class="bi bi-currency-euro"></i></strong></h6>
+                            <br />
+                            
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <nav class="pageList">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions()
+   {
+       ActiveLiElementClass = "active",
+       PageClasses = new[] { "page-link" },
+       LiElementClasses = new[] { "page-item" },
+       UlElementClasses = new[] { "pagination", "justify-content-center", "mt-3" },
+       LinkToNextPageFormat = "Next",
+       LinkToPreviousPageFormat = "Previous",
+       MaximumPageNumbersToDisplay = 5,
+       DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+       DisplayLinkToNextPage = PagedListDisplayMode.Always,
+   })
+    </nav>
+
+</body>
+</html>

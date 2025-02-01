@@ -1,0 +1,79 @@
+﻿@model teleScope.Models.User
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - teleScope_final</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/teleScope_final.styles.css" asp-append-version="true" />
+
+    <style>
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                     class="img-fluid" alt="Phone image">
+            </div>
+
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="border-color: blue">
+                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                    @{
+                        if (ViewBag.Message != null)
+                        {
+                            <p style="color:red;">@ViewBag.Message</p>
+                        }
+                    }
+                   
+                    <form asp-controller="Users" asp-action="Login" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <label asp-for="Username" class="control-label"></label>
+                            <input asp-for="Username" class="form-control" required/>
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input type="password" asp-for="Password" class="form-control" required/>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                           
+                        </div>
+                        
+                        <!-- Submit button -->
+
+                        <div class="pt-1 mb-4">
+                            <button data-mdb-button-init class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                        </div>
+
+                        <a class="small text-muted" href="#!">Forgot password?</a>
+                        <p class="mb-5 pb-lg-2" style="color: #393f81;">
+                            Don't have an account? Please <a href="mailto:teleScopesupport@example.com">contact our team</a> for assistance.
+                            <!-- <a href="#!" style="color: #393f81;">Register here</a>-->
+                        </p>
+                        <a href="#!" class="small text-muted">Terms of use.</a>
+                        <a asp-controller="Home" asp-action="Privacy" class="small text-muted">Privacy policy</a>
+
+                    </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,141 @@
+﻿@model teleScope.Models.UserAdminModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>
+
+    <style>
+        /*input type number appear as text field in main browsers*/
+
+        /*Chrome, Safari, Edge, Opera*/
+        input::-webkit-outer-spin-button
+        input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /*Firefox*/
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Section: Design Block -->
+    <section class="">
+        <!-- Jumbotron -->
+        <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+            <div class="container">
+                <div class="row gx-lg-5 align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <h1 class="my-5 display-4 fw-bold ls-tight text-black">
+                            Admin Notification<br />
+                            <span class="text-primary">Admin Creation</span>
+                        </h1>
+                        <p style="color: hsl(217, 10%, 50.8%)">
+                            Υou are about to process <strong>critical admin data</strong>, essential for platform management and security. Ensure all details are <strong>accurate</strong>, up-to-date, and securely stored to prevent issues.
+                            <br /><br />
+                            <strong>Admin data is highly sensitive</strong>—handle it with strict confidentiality and comply with company policies.
+                            <br /><br />
+                            For assistance, contact support.
+                            <a asp-controller="Admins" asp-action="Index">Back to admins</a>
+                            <br />
+                        </p>
+                        <h4 class="fw-bold text-black">Important Notes</h4>
+                        <ul class="text-danger fw-bold">
+                            <li> The <strong>Username</strong> must be unique.</li>
+                        </ul>
+                        <p class="float-md-start">
+                            <a asp-controller="Admins" asp-action="Index" class="btn btn-primary">Back to Admins</a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <div class="card">
+                            <div class="card-body py-5 px-md-5 text-black">
+                                <h4 class="card-title text-center"><strong>Add Admin</strong></h4>
+                                <br>
+                                <form asp-action="Create">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div data-mdb-input-init class="form-outline">
+                                                <label asp-for="user.FirstName" class="control-label fw-bold"></label>
+                                                <input asp-for="user.FirstName" class="form-control" required />
+                                                <span asp-validation-for="user.FirstName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div data-mdb-input-init class="form-outline">
+                                                <label asp-for="user.LastName" class="control-label fw-bold"></label>
+                                                <input asp-for="user.LastName" class="form-control" required />
+                                                <span asp-validation-for="user.LastName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Username input -->
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <label asp-for="user.Username" class="control-label fw-bold"></label>
+                                        <input asp-for="user.Username" class="form-control" required />
+                                        <span asp-validation-for="user.Username" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- Password input -->
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <label asp-for="user.Password" class="control-label fw-bold"></label>
+                                        <input type="password" asp-for="user.Password" class="form-control" required/>
+                                        <span asp-validation-for="user.Password" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- Email input -->
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <label asp-for="user.Email" class="control-label fw-bold"></label>
+                                        <input asp-for="user.Email" class="form-control" required />
+                                        <span asp-validation-for="user.Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="user.UserRole" value="admin" />
+                                        <span asp-validation-for="user.UserRole" class="text-danger"></span>
+                                    </div>
+
+
+                                    <!-- Submit button -->
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                                        Create
+                                    </button>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jumbotron -->
+    </section>
+    <!-- Section: Design Block -->
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>
+

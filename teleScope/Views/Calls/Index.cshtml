@@ -1,0 +1,112 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.EntityFramework
+@using X.PagedList
+@model X.PagedList.IPagedList<teleScope.Models.CustomerCallsModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    h1 {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+
+    }
+
+    .body:hover {
+        background-color: #f2e6ff;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+     a:hover {
+        color: #0056b3;
+     }
+
+     h1{
+         font-size: 35px;
+     }
+
+</style>
+<br />
+<h1>Calls</h1>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+                Username
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Call Type
+            </th>
+            <th>
+                Destination Number
+            </th>
+            <th>
+                Duration
+            </th>
+            <th>
+                Time
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                 @item.call.CallDate.ToString("dd-MM-yyyy")
+            </td>
+            <td>
+                 @Html.DisplayFor(modelItem => item.user.user.Username)
+            </td>
+            <td>
+                 @Html.DisplayFor(modelItem => item.call.Phone.Phone)
+            </td>
+            <td>
+                  @((item.call.IsIncoming ?? false) ? "Incoming" : "Outgoing")
+            </td>
+            <td>
+                 @Html.DisplayFor(modelItem => item.call.DestinationNumber)
+            </td>
+            <td>
+                 @Html.DisplayFor(modelItem => item.call.Duration)
+            </td>
+            <td>
+                 @item.call.CallDate.ToString("hh:mm tt")
+            </td>
+  
+        </tr>
+}
+    </tbody>
+</table>
+<nav class="pageList">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions()
+{
+    ActiveLiElementClass = "active",
+    PageClasses = new[] { "page-link" },
+    LiElementClasses = new[] { "page-item" },
+    UlElementClasses = new[] { "pagination", "justify-content-center", "mt-3" },
+    LinkToNextPageFormat = "Next",
+    LinkToPreviousPageFormat = "Previous",
+    MaximumPageNumbersToDisplay = 5,
+    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+})
+</nav>

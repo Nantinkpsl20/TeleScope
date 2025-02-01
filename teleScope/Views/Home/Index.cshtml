@@ -1,0 +1,151 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var programmes = ViewData["Programmes"] as IEnumerable<Programme>;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - teleScope</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+
+
+    <style>
+        .c-item {
+            height: 480px;
+        }
+
+        .c-img {
+            height: 100%;
+            object-fit: cover;
+            /*filter: brightness(0.6);*/
+        }
+
+        .programs{
+            background-color: lightblue;
+            text-align: center;
+            height: 700px;
+        }
+
+        .card-img-card,
+        .image-card {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .image-card{
+            max-height: 50%;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            object-fit: contain;
+        }
+
+        .left{
+            text-align: left;
+            font-size: small;
+            color: black;
+
+        }
+
+        .card {
+            height: 490px;
+            width: 320px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-body{
+            flex-grow: 1;
+        }
+
+        .card-body .btn{
+           margin-bottom: 30px;
+        }
+
+        .card-text{
+            font-size: 13pt;
+        }
+
+        .iwt {
+            display: block;
+        }
+
+        .bi{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active c-item">
+                <img src="images/img2.png" class="d-block w-100 c-img" alt="Slide 1">
+            </div>
+            <div class="carousel-item c-item">
+                <img src="images/img1.png" class="d-block w-100 c-img" alt="Slide 2">
+            </div>
+            <div class="carousel-item c-item">
+                <img src="images/img3.png" class="d-block w-100 c-img" alt="Slide 3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <br>
+    <br>
+
+    <div class="programs">
+        <br />
+        <h1>Recommended Programs</h1>
+        <br /><br />
+        <div class="row row-cols-1 row-cols-md-3 g-0">
+            @foreach( var programme in programmes)
+            {
+                
+            
+            <div class="col">
+                <div class="card border-info mb-3">
+                    <br />
+                    <img src="images/phone.png" class="image-card" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>@programme.ProgrName</strong></h5>
+                        <br />
+                            <p class="card-text left"><i class="bi bi-phone"></i>&nbsp;<strong>@programme.MobileMinutes minutes</strong> for mobile calls</p>
+                            <p class="card-text left"><i class="bi bi-telephone"></i>&nbsp;<strong>@programme.LandlineMinutes minutes</strong> for landline calls</p>
+                            <p class="card-text left"><i class="bi bi-chat-right"></i>&nbsp;<strong>2000 SMS</strong></p>
+
+                            <a asp-controller="Programmes" asp-action="Details" asp-route-id="@programme.ProgramId" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x">more info</a>
+                    </div>
+                </div>
+            </div>
+            }
+            
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

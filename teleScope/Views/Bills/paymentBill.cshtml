@@ -1,0 +1,101 @@
+﻿@model teleScope.Models.Bill
+
+@{
+    ViewData["Title"] = "paymentView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>
+    <style>
+        /*input type number appear as text field in main browsers*/
+
+        /*Chrome, Safari, Edge, Opera*/
+        input::-webkit-outer-spin-button
+        input::-webkit-outer-spin-button{
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /*Firefox*/
+        input[type=number]{
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+<h1>Bill Payment</h1>
+
+
+<section class="p-4 p-md-5" style="
+    background-image: url(https://mdbcdn.b-cdn.net/img/Photos/Others/background3.webp);
+  ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-5">
+            <div class="card rounded-3">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h3>Payment</h3>
+                    </div>
+                    <form asp-action="paymentBill">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <input type="text" id="formControlLgXM" class="form-control form-control-lg border border-info-subtle"
+                                       placeholder="Card Owner Name" required />
+                                <label class="form-label" for="formControlLgXM">Card Owner</label>
+                            </div>
+
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <input type="text" id="formControlLgXM" class="form-control form-control-lg border border-info-subtle"
+                                       maxlength="16" pattern="\d{16}" placeholder="xxxx xxxx xxxx xxxx" required title="Please enter exactly 16 numbers" />
+                                <label class="form-label" for="formControlLgXM">Card Number</label>
+                            </div>
+        
+                        <div class="row mb-4">
+                                <div class="col-6">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <input type="month" id="formControlLgExpk" class="form-control border border-info-subtle"
+                                               value="2025-02" required min="2025-02" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <input type="password" id="formControlLgcvv" class="form-control border border-info-subtle"
+                                               maxlength="3" pattern="\d{3}" placeholder="XYZ" required title="Please enter exactly 3 numbers" />
+                                        <label class="form-label" for="formControlLgcvv">CVV/CVC</label>
+                                    </div>
+                                </div>
+                        </div>
+                            
+                            <input type="hidden" asp-for="BillId" />
+                           
+                            <div class="form-group">  
+                                <input type="hidden" asp-for="IsPaid" value="true" class="form-control" />
+                                <span asp-validation-for="IsPaid" class="text-danger"></span>
+                            </div>
+
+                            <input type="submit" value="Confirm Payment" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg btn-block" />
+                            <!--<button data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg btn-block">Confirm Payment</button>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div>
+    <a asp-action="customerBills" class="btn btn-danger float-end">Cancel</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+    
+</body>
+</html>
